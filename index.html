@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>IRIS_SYSTEM_OFFICIAL</title>
+<style>
+  body { background: black; color: #00ff00; font-family: 'Courier New', monospace; padding: 20px; }
+  .hidden { display: none; }
+  a { color: #00f0ff; text-decoration: none; cursor: pointer; }
+</style>
+</head>
+<body>
+  <div id="bios">
+    <pre>
+      [ システムブートシーケンス... ]
+      [ IRIS-OS v9.0.2 - STABLE ]
+      ハードウェアをチェック中... [ OK ]
+      メモリチェック... [ OK ]
+      ...
+      [ 警告: FATAL_MEMORY_LEAK_DETECTED ]
+      [ ATTEMPTING_RECOVERY: STAT_03... ]
+    </pre>
+    <p><a onclick="startStory()">[ ログデータを展開する ]</a></p>
+  </div>
+
+  <div id="story" class="hidden">
+    <h2>UNIT_003: SHIBUYA_OVERWRITE</h2>
+    <p>(ここに物語の本文を貼り付ける)</p>
+    <video id="video" autoplay playsinline style="width:100%; max-width:500px; border:1px Solid #00f0ff;"></video>
+  </div>
+
+  <script>
+    function startStory() {
+      document.getElementById('bios').classList.add('hidden');
+      document.getElementById('story').classList.remove('hidden');
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => {
+          document.getElementById('video').srcObject = stream;
+        })
+        .catch(err => { console.log("カメラ接続拒否"); });
+    }
+  </script>
+</body>
+</html>
